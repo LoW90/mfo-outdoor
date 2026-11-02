@@ -9,6 +9,6 @@ export const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
 export function load() {
   const context = { console, URL, Number, String, Object, JSON, Error, document: { readyState: 'loading', addEventListener() {} } };
   vm.createContext(context);
-  vm.runInContext(script + '\n;globalThis.__api = { PRODUCTS, PROGRAMS, BUILD, recommend, goLink, esc, money };', context);
+  vm.runInContext(script + '\n;globalThis.__api = { PRODUCTS, PROGRAMS, BUILD, BRANDS, FILMS, HERO_FILM, recommend, goLink, esc, money };', context);
   return context.__api;
 }

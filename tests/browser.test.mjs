@@ -19,13 +19,15 @@ test('real browser: planner, filters, links, phone layout', async () => {
       await page.selectOption('#climate', 'cool');
       const plan = await page.textContent('#planResult');
       assert.match(plan, /K1000HT/); assert.match(plan, /\$37,495/); assert.match(plan, /Smokeless Fire Pit/);
-      assert.equal(await page.locator('#catalog .card').count(), 11);
+      assert.equal(await page.locator('#catalog .card').count(), 13);
+      assert.equal(await page.locator('#brandGrid .brand-card').count(), 10);
+      assert.equal(await page.locator('#filmRow .film').count(), 3);
       await page.click('[data-filter="connected"]');
       assert.equal(await page.locator('#catalog .card').count(), 5);
       assert.equal(await page.getAttribute('[data-filter="connected"]', 'aria-pressed'), 'true');
       const links = await page.$$eval('#catalog a.btn', as => as.map(a => [a.href, a.rel]));
       for (const [href, rel] of links) { assert.match(href, /^https:\/\/.*utm_source=theoutdoorestate/); assert.match(rel, /sponsored/); }
-      assert.equal(await page.locator('#costRows tr').count(), 4);
+      assert.equal(await page.locator('#costRows tr', { hasText: '$' }).count(), 4);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       assert.ok(overflow <= 0, `horizontal overflow ${overflow}px at ${width}`);
       if (width === 375) {

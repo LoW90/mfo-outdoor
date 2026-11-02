@@ -99,6 +99,28 @@ footer { background: var(--night); color: #cfc6b6; padding: 48px 0; font-size: 1
 footer p { margin: 0 0 10px; }
 .preview-flag { display: inline-block; border: 1px solid #6b6253; border-radius: 999px; padding: 3px 12px; font-size: 14px; }
 
+.brands { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+.brand-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+.brand-card .media { aspect-ratio: 4 / 3; max-width: 100%; position: relative; background: linear-gradient(135deg, #2a2620, #12100c); }
+.brand-card .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.brand-card .media .mark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 12px; text-align: center; color: #efe6d6; font-family: "Playfair Display", Georgia, serif; font-size: 1.35rem; }
+.brand-card .body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.brand-card h3 { margin: 0; font-size: 1.1rem; }
+.brand-card p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+.brand-card .status { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-soft); }
+.films { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 260px); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+.film { scroll-snap-align: start; aspect-ratio: 9 / 16; max-width: 100%; border-radius: var(--radius); overflow: hidden; position: relative; background: radial-gradient(70% 50% at 50% 85%, rgba(232,120,52,.6), transparent 70%), linear-gradient(180deg, #1b2a24, #12100c); color: #efe6d6; }
+.film video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.film .caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px; background: linear-gradient(transparent, rgba(0,0,0,.7)); }
+.film .caption strong { display: block; font-family: "Playfair Display", Georgia, serif; font-size: 1.2rem; }
+.film .caption span { font-size: 14px; }
+.film .soon { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,.9); color: var(--ink); border-radius: 999px; padding: 3px 12px; font-size: 14px; font-weight: 600; }
+.ai-label { position: absolute; top: 14px; right: 14px; background: rgba(0,0,0,.55); color: #fff; border-radius: 999px; padding: 3px 10px; font-size: 14px; }
+.card .swatch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+details.costs { margin-top: 22px; }
+details.costs summary { cursor: pointer; font-weight: 600; }
+details.costs .table-scroll { margin-top: 14px; }
+
 @media (max-width: 820px) {
   .planner { grid-template-columns: minmax(0, 1fr); }
   #menuBtn { display: inline-block; }
@@ -118,9 +140,10 @@ footer p { margin: 0 0 10px; }
     <button id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
     <nav id="navLinks">
       <a href="#plan">Plan</a>
+      <a href="#brands">Brands</a>
       <a href="#edit">The Edit</a>
       <a href="#connected">Connected</a>
-      <a href="#costs">Costs</a>
+      <a href="#films">Films</a>
     </nav>
   </div>
 </header>
@@ -176,13 +199,32 @@ footer p { margin: 0 0 10px; }
         <div class="panel" id="planResult" aria-live="polite"></div>
       </div>
       <p class="note">Build costs: <a href="https://www.homeadvisor.com/cost/outdoor-living/build-an-outdoor-kitchen/">HomeAdvisor outdoor kitchen cost guide</a>, by area. They cover framing, counters, cabinets and labour, and vary by region. Product prices were checked on the linked merchant pages on 2 November 2026.</p>
+      <details class="costs">
+        <summary>Typical outdoor kitchen build costs by area</summary>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Area</th><th>Typical cost</th></tr></thead>
+            <tbody id="costRows"></tbody>
+          </table>
+        </div>
+        <p class="note">Source: <a href="https://www.homeadvisor.com/cost/outdoor-living/build-an-outdoor-kitchen/">HomeAdvisor</a> (average $16,480; $33 to $130 per sq ft). Luxury builds with premium grills and stone run to $40,000 and beyond (<a href="https://lawnlove.com/blog/outdoor-kitchen-cost/">Lawn Love, 2026</a>).</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="brands">
+    <div class="wrap">
+      <p class="eyebrow">The makers</p>
+      <h2>Ten luxury outdoor brands</h2>
+      <p class="intro">The names we would trust with an estate terrace, from live-fire grills to teak. None is a partner yet; each card says where you can buy.</p>
+      <div class="brands" id="brandGrid"></div>
     </div>
   </section>
 
   <section id="edit">
     <div class="wrap">
       <p class="eyebrow">The Edit</p>
-      <h2>Eleven pieces we would start with</h2>
+      <h2>Thirteen pieces we would start with</h2>
       <p class="intro">Chosen for build quality and how they work together, not for commission. Prices change; each card says where and when we checked.</p>
       <div class="filters" role="group" aria-label="Filter by category">
         <button type="button" data-filter="all" aria-pressed="true">All</button>
@@ -192,6 +234,15 @@ footer p { margin: 0 0 10px; }
         <button type="button" data-filter="connected" aria-pressed="false">Connected</button>
       </div>
       <div id="catalog"></div>
+    </div>
+  </section>
+
+  <section id="films">
+    <div class="wrap">
+      <p class="eyebrow">Films</p>
+      <h2>Evenings on the terrace</h2>
+      <p class="intro">Short films of real evenings outside: a live-fire dinner, a long Sunday smoke, a winter terrace under the heaters.</p>
+      <div class="films" id="filmRow"></div>
     </div>
   </section>
 
@@ -208,19 +259,6 @@ footer p { margin: 0 0 10px; }
     </div>
   </section>
 
-  <section id="costs">
-    <div class="wrap">
-      <p class="eyebrow">What it costs</p>
-      <h2>Typical outdoor kitchen build costs</h2>
-      <div class="table-scroll">
-        <table>
-          <thead><tr><th>Area</th><th>Typical cost</th></tr></thead>
-          <tbody id="costRows"></tbody>
-        </table>
-      </div>
-      <p class="note">Source: <a href="https://www.homeadvisor.com/cost/outdoor-living/build-an-outdoor-kitchen/">HomeAdvisor</a> (average $16,480; $33 to $130 per sq ft). Luxury builds with premium grills and stone run to $40,000 and beyond (<a href="https://lawnlove.com/blog/outdoor-kitchen-cost/">Lawn Love, 2026</a>). A premium freestanding grill alone can exceed that.</p>
-    </div>
-  </section>
 
   <section id="disclosure">
     <div class="wrap">
@@ -243,6 +281,8 @@ const CHECKED = '2 Nov 2026';
 const PRODUCTS = [
   { id: 'k1000', cat: 'kitchen', look: 'steel', brand: 'Kalamazoo Outdoor Gourmet', name: 'K1000HT Freestanding Hybrid Fire Grill', price: 37495, blurb: 'Cooks on gas, wood or charcoal. 1,012 sq in surface, infrared rotisserie, 125,500 BTU.', where: 'kalamazoogourmet.com', url: 'https://kalamazoogourmet.com/products/K1000-Freestanding-Hybrid-Fire-Grill/', program: 'kalamazoo' },
   { id: 'k750', cat: 'kitchen', look: 'steel', brand: 'Kalamazoo Outdoor Gourmet', name: 'K750HS Hybrid Fire Grill with Side Burner', price: 38995, blurb: 'Three cast stainless burners, infrared rotisserie and dual cooktop burners for a full kitchen in one.', where: 'kalamazoogourmet.com', url: 'https://kalamazoogourmet.com/products/k750hs-freestanding-hybrid-fire-grill-with-side-burner', program: 'kalamazoo' },
+  { id: 'hestan42', cat: 'kitchen', look: 'steel', brand: 'Hestan', name: '42-in Built-In Grill with Rotisserie, Steeletto', price: 8579, wasPrice: 9009, blurb: 'Natural gas, trellis burners and rotisserie in stainless steel.', where: 'BBQGuys', url: 'https://www.bbqguys.com/i/2957283/hestan/42-inch-stainless-steel-built-in-natural-gas-grill-with-rotisserie-gabr42-ng-ss', program: 'bbqguys' },
+  { id: 'lynx42', cat: 'kitchen', look: 'steel', brand: 'Lynx', name: 'Professional 42-in Built-In Grill with Rotisserie', price: 8499, blurb: 'Propane, three burners and rotisserie; the professional standard.', where: 'BBQGuys', url: 'https://www.bbqguys.com/lynx/42-inch-gas-bbq-grill-built-in-propane-gas-with-rotisserie-l42r-1-lp', program: 'bbqguys' },
   { id: 'blaze44', cat: 'kitchen', look: 'steel', brand: 'Blaze', name: 'Professional LUX 44-in 4-Burner Built-In Grill', price: 4899, wasPrice: 6867.5, blurb: 'Natural gas, rotisserie included. The workhorse for a built-in island.', where: 'BBQGuys', url: 'https://www.bbqguys.com/d/17390/cooking/grills/gas/blaze', program: 'bbqguys' },
   { id: 'blaze34', cat: 'kitchen', look: 'steel', brand: 'Blaze', name: 'Professional LUX 34-in 3-Burner Built-In Grill', price: 3999, wasPrice: 5571.5, blurb: 'Propane, rotisserie included. Fits a smaller terrace island.', where: 'BBQGuys', url: 'https://www.bbqguys.com/d/17390/cooking/grills/gas/blaze', program: 'bbqguys' },
   { id: 'timberline', cat: 'connected', look: 'steel', brand: 'Traeger', name: 'Timberline XL Wi-Fi Pellet Grill', price: 4378.94, blurb: 'WiFIRE app control for long smokes; front shelf and cover included.', where: 'BBQGuys', url: 'https://www.bbqguys.com/i/3152262/traeger/all-new-timberline-xl-wi-fi-controlled-wood-pellet-grill-w-wifire-front-shelf-grill-cover-included', program: 'bbqguys', connected: true },
@@ -265,6 +305,25 @@ const BUILD = {
   large: { label: 'Entertaining, 200 to 400 sq ft', cost: [9900, 39000] },
   estate: { label: 'Estate, about 400 sq ft', cost: [13200, 52000] }
 };
+// Media slots: set src to a file in assets/ once licensed photos or approved films exist. Empty slots show a designed placeholder.
+const HERO_FILM = { src: null, poster: null, aiGenerated: true };
+const FILMS = [
+  { id: 'live-fire', title: 'Live-fire dinner', line: 'Kalamazoo hybrid grill, six guests', src: null, aiGenerated: true },
+  { id: 'sunday-smoke', title: 'The Sunday smoke', line: 'Twelve hours, watched from a phone', src: null, aiGenerated: true },
+  { id: 'winter-terrace', title: 'Winter terrace', line: 'Bromic heat and a Breeo fire', src: null, aiGenerated: true }
+];
+const BRANDS = [
+  { name: 'Kalamazoo Outdoor Gourmet', what: 'Hybrid live-fire grills and outdoor kitchen cabinetry, made in Michigan.', from: 37495, buy: 'kalamazoogourmet.com', url: 'https://kalamazoogourmet.com/', program: 'Program found: 10%, 90 days (Awin)', photo: null },
+  { name: 'Lynx', what: 'Professional built-in grills and outdoor kitchen equipment.', from: 8499, buy: 'BBQGuys', url: 'https://www.bbqguys.com/lynx/42-inch-gas-bbq-grill-built-in-propane-gas-with-rotisserie-l42r-1-lp', program: 'Through BBQGuys (about 4%)', photo: null },
+  { name: 'Hestan', what: 'Chef-grade grills with colour-finished steel.', from: 8579, buy: 'BBQGuys', url: 'https://www.bbqguys.com/i/2957283/hestan/42-inch-stainless-steel-built-in-natural-gas-grill-with-rotisserie-gabr42-ng-ss', program: 'Through BBQGuys (about 4%)', photo: null },
+  { name: 'Blaze', what: 'Built-in grills for outdoor kitchen islands.', from: 3999, buy: 'BBQGuys', url: 'https://www.bbqguys.com/d/17390/cooking/grills/gas/blaze', program: 'Through BBQGuys (about 4%)', photo: null },
+  { name: 'Bromic', what: 'Infrared patio heaters with Smart-Heat control.', from: 1610, buy: 'BBQGuys', url: 'https://www.bbqguys.com/d/20868/outdoor-living/heaters/bromic-heating/platinum', program: 'Through BBQGuys (about 4%)', photo: null },
+  { name: 'Traeger', what: 'Wi-Fi wood pellet grills.', from: 4378.94, buy: 'BBQGuys', url: 'https://www.bbqguys.com/i/3152262/traeger/all-new-timberline-xl-wi-fi-controlled-wood-pellet-grill-w-wifire-front-shelf-grill-cover-included', program: 'Through BBQGuys (about 4%)', photo: null },
+  { name: 'Breeo', what: 'Smokeless wood fire pits in steel.', from: 1599, buy: 'The Home Depot', url: 'https://homedepot.com/p/Breeo-X-Series-30-Smokeless-Fire-Pit-in-Stainless-Steel-BR-X30S/320295896', program: 'Breeo program found: 4%', photo: null },
+  { name: 'Neighbor', what: 'Modern teak and Sunbrella outdoor furniture.', from: 3100, buy: 'BBQGuys', url: 'https://www.bbqguys.com/neighbor/sofa-w-teak-arms-sunbrella-leaf', program: 'Program found: 6% (Impact)', photo: null },
+  { name: 'Kingsley Bate', what: 'Classic grade-A teak dining and lounge collections.', from: null, buy: 'AuthenTEAK', url: 'https://authenteak.com/kingsley-bate-la-jolla-7-piece-patio-dining-set', program: 'No program found yet; price on request', photo: null },
+  { name: 'Beatbot', what: 'AI-mapping robotic pool cleaners.', from: 3550, buy: 'beatbot.com', url: 'https://www.beatbot.com/', program: 'Program found: 10%, 30 days', photo: null }
+];
 const byId = id => PRODUCTS.find(p => p.id === id);
 
 function esc(s) {
@@ -299,6 +358,7 @@ function recommend(plan) {
   const picks = [];
   if (plan.style === 'fire') picks.push({ id: plan.size === 'estate' ? 'k750' : 'k1000', why: plan.size === 'estate' ? 'live fire plus cooktop burners for a large party' : 'cooks on gas, wood or charcoal' });
   else if (plan.style === 'smoke') picks.push({ id: 'timberline', why: 'long smokes you can watch from your phone' });
+  else if (plan.size === 'estate') picks.push({ id: 'hestan42', why: 'chef-grade 42-inch grill for a large kitchen' });
   else picks.push({ id: big ? 'blaze44' : 'blaze34', why: big ? 'four burners for a bigger crowd' : 'three burners sized for a terrace' });
   if (plan.climate === 'cool') {
     picks.push({ id: plan.size === 'compact' ? 'bromic33' : 'bromic53', why: 'keeps evenings comfortable on a timer' });
@@ -324,7 +384,7 @@ function card(p) {
   const tag = p.connected ? '<span class="tag">Connected</span>' : '';
   const stock = p.stock ? ` · ${esc(p.stock)}` : '';
   return `<article class="card" data-cat="${p.cat}${p.connected ? ' connected' : ''}">` +
-    `<div class="swatch ${p.look}">${tag}</div><div class="body">` +
+    `<div class="swatch ${p.look}">${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy">` : ''}${tag}</div><div class="body">` +
     `<span class="brandline">${esc(p.brand)}</span><h3>${esc(p.name)}</h3>` +
     `<div class="price">${money(p.price)}${was}</div><p>${esc(p.blurb)}</p>` +
     `<div class="meta">Price ${esc(p.priceNote || 'checked at ' + p.where)}, ${CHECKED}${stock}.<br>${esc(PROGRAMS[p.program])}</div>` +
@@ -338,12 +398,34 @@ function renderCatalog(filter) {
   return list;
 }
 
+function renderBrands() {
+  document.getElementById('brandGrid').innerHTML = BRANDS.map(b =>
+    `<article class="brand-card"><div class="media">${b.photo ? `<img src="${esc(b.photo)}" alt="${esc(b.name)} outdoor setting" loading="lazy">` : `<span class="mark">${esc(b.name)}</span>`}</div>` +
+    `<div class="body"><h3>${esc(b.name)}</h3><p>${esc(b.what)}</p>` +
+    `<p>${b.from ? 'From ' + money(b.from) : 'Price on request'} · <a rel="sponsored noopener" target="_blank" href="${esc(goLink({ url: b.url, id: 'brand-' + b.name.toLowerCase().replace(/[^a-z]+/g, '-') }))}">${esc(b.buy)}</a></p>` +
+    `<div class="status">${esc(b.program)}</div></div></article>`).join('');
+}
+
+function renderFilms() {
+  document.getElementById('filmRow').innerHTML = FILMS.map(f =>
+    `<figure class="film" style="margin:0">${f.src ? `<video src="${esc(f.src)}" muted loop playsinline preload="metadata" aria-label="${esc(f.title)}"></video>${f.aiGenerated ? '<span class="ai-label">AI film</span>' : ''}` : '<span class="soon">Film coming</span>'}` +
+    `<figcaption class="caption"><strong>${esc(f.title)}</strong><span>${esc(f.line)}</span></figcaption></figure>`).join('');
+  document.querySelectorAll('.film video').forEach(v => v.addEventListener('click', () => (v.paused ? v.play() : v.pause())));
+}
+
+function renderHeroFilm() {
+  if (!HERO_FILM.src) return false;
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('heroScene').innerHTML = `<video src="${esc(HERO_FILM.src)}"${HERO_FILM.poster ? ` poster="${esc(HERO_FILM.poster)}"` : ''} muted loop playsinline ${reduce ? '' : 'autoplay'}></video>`;
+  return true;
+}
+
 function renderCosts() {
   document.getElementById('costRows').innerHTML = Object.values(BUILD).map(b => `<tr><td>${esc(b.label)}</td><td>${money(b.cost[0])} to ${money(b.cost[1])}</td></tr>`).join('');
 }
 
 function init() {
-  renderPlan(); renderCatalog('all'); renderCosts();
+  renderPlan(); renderCatalog('all'); renderCosts(); renderBrands(); renderFilms(); renderHeroFilm();
   document.getElementById('planForm').addEventListener('change', renderPlan);
   document.querySelectorAll('.filters button').forEach(b => b.addEventListener('click', () => renderCatalog(b.dataset.filter)));
   const menu = document.getElementById('menuBtn'), links = document.getElementById('navLinks');
