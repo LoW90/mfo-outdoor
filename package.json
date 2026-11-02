@@ -1,0 +1,14 @@
+{
+  "name": "mfo-outdoor-estate",
+  "private": true,
+  "type": "module",
+  "description": "The Outdoor Estate, powered by Many Faces Online. Affiliate planning guide for luxury outdoor kitchens, fire and connected outdoor living.",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "test": "node --test tests/unit.test.mjs",
+    "test:browser": "node tools/build.mjs && node --test tests/browser.test.mjs",
+    "test:all": "node tools/build.mjs && node --test tests/unit.test.mjs tests/browser.test.mjs"
+  },
+  "engines": { "node": ">=22" },
+  "devDependencies": { "playwright": "1.63.0" }
+}
