@@ -20,7 +20,7 @@ test('real browser: planner, filters, links, phone layout', async () => {
       const plan = await page.textContent('#planResult');
       assert.match(plan, /K1000HT/); assert.match(plan, /\$37,495/); assert.match(plan, /Smokeless Fire Pit/);
       assert.equal(await page.locator('#catalog .card').count(), 13);
-      assert.equal(await page.locator('#brandGrid .brand-card').count(), 10);
+      assert.equal(await page.locator('#brandGrid .brand-card').count(), 9);
       assert.equal(await page.locator('#filmRow .film').count(), 3);
       await page.click('[data-filter="connected"]');
       assert.equal(await page.locator('#catalog .card').count(), 5);

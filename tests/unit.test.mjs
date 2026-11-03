@@ -63,11 +63,13 @@ test('outbound links keep the merchant page and add only our source tags', () =>
   assert.equal(u.searchParams.get('utm_campaign'), 'k1000');
 });
 
-test('ten brands, each with a buy link, a price or price-on-request, and no partner claim', () => {
-  assert.equal(api.BRANDS.length, 10);
+test('nine brands, each in the catalog with a checked price and a buy link, and no partner claim', () => {
+  assert.equal(api.BRANDS.length, 9);
+  const makers = new Set(api.PRODUCTS.map(p => p.brand));
   for (const b of api.BRANDS) {
     assert.match(b.url, /^https:\/\//, b.name);
-    assert.ok(b.from === null || b.from > 0, b.name);
+    assert.ok(makers.has(b.name), b.name + ' has a product in the catalog');
+    assert.ok(b.from > 0, b.name);
     assert.doesNotMatch(b.program, /\bpartner\b|\bapproved\b/i, b.name);
   }
 });
@@ -86,4 +88,10 @@ test('money formatting and escaping', () => {
   assert.equal(api.money(37495), '$37,495');
   assert.equal(api.money(4378.94), '$4,378.94');
   assert.equal(api.esc('<b>"x"</b>'), '&lt;b&gt;&quot;x&quot;&lt;/b&gt;');
+});
+
+test('sister-store markers are in place and the catalog export matches the page', async () => {
+  assert.match(html, /<!-- mf-sister-stores:start -->[\s\S]*<!-- mf-sister-stores:end -->\s*<section id="disclosure">/);
+  const { loadResearch } = await import('../tools/catalog.mjs');
+  assert.deepEqual(loadResearch().products.map(p => p.id), [...api.PRODUCTS].map(p => p.id));
 });
