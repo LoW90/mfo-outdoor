@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>The Outdoor Estate</title>
+<meta name="description" content="Plan a luxury outdoor kitchen and living space: live-fire grills, heat, fire and connected outdoor products, with real prices and honest picks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #17140f; --ink-soft: #4a443b; --paper: #f7f3ec; --card: #fffdf9; --line: #e4dccd;
+  --ember: #a4471c; --ember-dark: #7d3313; --brass: #9a7a3c; --forest: #2f4a3a; --night: #12100c;
+  --radius: 22px; --shadow: 0 10px 30px rgba(23,20,15,.08);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.6 Inter, system-ui, sans-serif; }
+h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; font-weight: 600; line-height: 1.15; margin: 0 0 .5em; }
+h1 { font-size: clamp(2.3rem, 6vw, 4.4rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+h3 { font-size: 1.25rem; }
+a { color: inherit; }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+.eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: 14px; font-weight: 600; color: var(--brass); margin: 0 0 .8em; }
+.btn { display: inline-block; background: var(--ember); color: #fff; text-decoration: none; border: 0; border-radius: 999px; padding: 14px 26px; font: 600 16px Inter, sans-serif; cursor: pointer; }
+.btn:hover { background: var(--ember-dark); }
+.btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+
+header { position: sticky; top: 0; z-index: 10; background: rgba(247,243,236,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+.brand { font-family: "Playfair Display", serif; font-size: 1.3rem; text-decoration: none; }
+#navLinks { display: flex; gap: 26px; }
+#navLinks a { text-decoration: none; font-weight: 500; font-size: 16px; }
+#menuBtn { display: none; background: none; border: 1.5px solid var(--ink); border-radius: 999px; padding: 8px 16px; font: 600 15px Inter, sans-serif; color: var(--ink); }
+
+.hero { position: relative; min-height: 78vh; display: flex; align-items: flex-end; color: #fff; overflow: hidden; background: var(--night); }
+.hero-scene { position: absolute; inset: 0; background:
+  radial-gradient(60% 45% at 72% 78%, rgba(232,120,52,.55), transparent 70%),
+  radial-gradient(40% 30% at 20% 20%, rgba(154,122,60,.35), transparent 70%),
+  linear-gradient(180deg, #1b2a24 0%, #12100c 70%); }
+.hero-scene video { width: 100%; height: 100%; object-fit: cover; }
+.hero .wrap { position: relative; padding-bottom: 72px; }
+.hero p.lead { font-size: 1.2rem; max-width: 560px; color: #efe6d6; }
+.hero .eyebrow { color: #d9b56f; }
+
+section { padding: 84px 0; }
+.intro { max-width: 680px; color: var(--ink-soft); margin-bottom: 36px; }
+.note { font-size: 14px; color: var(--ink-soft); margin-top: 18px; }
+
+.planner { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 28px; align-items: start; }
+.planner > * { min-width: 0; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+.field { margin-bottom: 18px; }
+.field label, .field legend { display: block; font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+select { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; font: 16px Inter, sans-serif; color: var(--ink); }
+fieldset { border: 0; padding: 0; margin: 0 0 18px; }
+.check { display: flex; gap: 10px; align-items: center; font-size: 16px; margin: 6px 0; font-weight: 400; }
+.check input { width: 20px; height: 20px; accent-color: var(--ember); }
+#planResult .range { font-family: "Playfair Display", serif; font-size: 2rem; margin: 4px 0 2px; }
+#planResult ul { list-style: none; padding: 0; margin: 18px 0 0; }
+#planResult li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); }
+#planResult li > span:first-child { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+#planResult li > span:last-child { white-space: nowrap; font-weight: 600; }
+#planResult .why { display: block; font-size: 14px; color: var(--ink-soft); }
+
+.filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; }
+.filters button { border: 1.5px solid var(--line); background: var(--card); border-radius: 999px; padding: 9px 18px; font: 500 15px Inter, sans-serif; cursor: pointer; color: var(--ink); }
+.filters button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+#catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+.swatch { height: 150px; position: relative; }
+.swatch.steel { background: linear-gradient(135deg, #d9d7d2, #8d8a84 60%, #4a4844); }
+.swatch.fire { background: radial-gradient(70% 70% at 50% 90%, #e8813a, #8a2e10 60%, #1d120c); }
+.swatch.teak { background: linear-gradient(135deg, #c99a64, #8a5a2e 60%, #4d3018); }
+.swatch.water { background: linear-gradient(135deg, #8fd0d6, #2c7f8f 60%, #123b45); }
+.swatch .tag { position: absolute; left: 14px; bottom: 12px; background: rgba(255,255,255,.92); color: var(--ink); border-radius: 999px; padding: 4px 12px; font-size: 14px; font-weight: 600; }
+.card .body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+.card .brandline { font-size: 14px; color: var(--brass); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.card .price { font-family: "Playfair Display", serif; font-size: 1.5rem; margin: 6px 0; }
+.card p { font-size: 15px; color: var(--ink-soft); margin: 0 0 10px; }
+.card .meta { font-size: 14px; color: var(--ink-soft); margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line); }
+.card .btn { margin-top: 14px; text-align: center; }
+
+.connected { background: var(--forest); color: #f2efe7; }
+.connected .intro { color: #d5dccf; }
+.connected .eyebrow { color: #d9c08a; }
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.pillar { border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius); padding: 22px; }
+.pillar p { font-size: 16px; color: #d5dccf; margin: 0; }
+
+table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: var(--radius); overflow: hidden; }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); font-size: 15px; }
+th { font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
+.table-scroll { overflow-x: auto; }
+
+footer { background: var(--night); color: #cfc6b6; padding: 48px 0; font-size: 15px; }
+footer p { margin: 0 0 10px; }
+.preview-flag { display: inline-block; border: 1px solid #6b6253; border-radius: 999px; padding: 3px 12px; font-size: 14px; }
+
+.brands { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+.brand-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+.brand-card .media { aspect-ratio: 4 / 3; max-width: 100%; position: relative; background: linear-gradient(135deg, #2a2620, #12100c); }
+.brand-card .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.brand-card .media .mark { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 12px; text-align: center; color: #efe6d6; font-family: "Playfair Display", Georgia, serif; font-size: 1.35rem; }
+.brand-card .body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.brand-card h3 { margin: 0; font-size: 1.1rem; }
+.brand-card p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+.brand-card .status { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-soft); }
+.films { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 260px); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+.film { scroll-snap-align: start; aspect-ratio: 9 / 16; max-width: 100%; border-radius: var(--radius); overflow: hidden; position: relative; background: radial-gradient(70% 50% at 50% 85%, rgba(232,120,52,.6), transparent 70%), linear-gradient(180deg, #1b2a24, #12100c); color: #efe6d6; }
+.film video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.film .caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px; background: linear-gradient(transparent, rgba(0,0,0,.7)); }
+.film .caption strong { display: block; font-family: "Playfair Display", Georgia, serif; font-size: 1.2rem; }
+.film .caption span { font-size: 14px; }
+.film .soon { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,.9); color: var(--ink); border-radius: 999px; padding: 3px 12px; font-size: 14px; font-weight: 600; }
+.ai-label { position: absolute; top: 14px; right: 14px; background: rgba(0,0,0,.55); color: #fff; border-radius: 999px; padding: 3px 10px; font-size: 14px; }
+.card .swatch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+details.costs { margin-top: 22px; }
+details.costs summary { cursor: pointer; font-weight: 600; }
+details.costs .table-scroll { margin-top: 14px; }
+
+@media (max-width: 820px) {
+  .planner { grid-template-columns: minmax(0, 1fr); }
+  #menuBtn { display: inline-block; }
+  #navLinks { display: none; position: absolute; top: 66px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--paper); border-bottom: 1px solid var(--line); }
+  #navLinks.open { display: flex; }
+  #navLinks a { padding: 14px 20px; border-top: 1px solid var(--line); }
+  section { padding: 60px 0; }
+  .hero { min-height: 70vh; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">The Outdoor Estate</a>
+    <button id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <nav id="navLinks">
+      <a href="#plan">Plan</a>
+      <a href="#brands">Brands</a>
+      <a href="#edit">The Edit</a>
+      <a href="#connected">Connected</a>
+      <a href="#films">Films</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-scene" id="heroScene" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="eyebrow">Outdoor kitchens · Fire · Connected living</p>
+      <h1>Evenings worth staying out for.</h1>
+      <p class="lead">Plan an outdoor kitchen and terrace the way a designer would, with real prices and honest picks from makers like Kalamazoo, Blaze, Bromic and Traeger.</p>
+      <a class="btn" href="#plan">Plan your outdoor kitchen</a>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="wrap">
+      <p class="eyebrow">The planner</p>
+      <h2>Plan your outdoor kitchen</h2>
+      <p class="intro">Answer four questions. You get a typical build cost for the size you have in mind, and the products we would start with.</p>
+      <div class="planner">
+        <form class="panel" id="planForm" onsubmit="return false">
+          <div class="field">
+            <label for="size">Size of the cooking and dining area</label>
+            <select id="size">
+              <option value="compact">Terrace, up to 100 sq ft</option>
+              <option value="medium" selected>Patio, 100 to 200 sq ft</option>
+              <option value="large">Entertaining, 200 to 400 sq ft</option>
+              <option value="estate">Estate, about 400 sq ft</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="style">How you like to cook</label>
+            <select id="style">
+              <option value="gas" selected>Gas, fast and simple</option>
+              <option value="fire">Live fire: wood, charcoal and gas</option>
+              <option value="smoke">Smoke, controlled from your phone</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="climate">Your evenings</label>
+            <select id="climate">
+              <option value="warm" selected>Warm most of the year</option>
+              <option value="cool">Cool evenings or four seasons</option>
+            </select>
+          </div>
+          <fieldset>
+            <legend>Also planning</legend>
+            <label class="check"><input type="checkbox" name="extra" value="seating"> Outdoor lounge seating</label>
+            <label class="check"><input type="checkbox" name="extra" value="pool"> A pool that cleans itself</label>
+          </fieldset>
+        </form>
+        <div class="panel" id="planResult" aria-live="polite"></div>
+      </div>
+      <p class="note">Build costs: <a href="https://www.homeadvisor.com/cost/outdoor-living/build-an-outdoor-kitchen/">HomeAdvisor outdoor kitchen cost guide</a>, by area. They cover framing, counters, cabinets and labour, and vary by region. Product prices were checked on the linked merchant pages on 2 November 2026.</p>
+      <details class="costs">
+        <summary>Typical outdoor kitchen build costs by area</summary>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Area</th><th>Typical cost</th></tr></thead>
+            <tbody id="costRows"></tbody>
+          </table>
+        </div>
+        <p class="note">Source: <a href="https://www.homeadvisor.com/cost/outdoor-living/build-an-outdoor-kitchen/">HomeAdvisor</a> (average $16,480; $33 to $130 per sq ft). Luxury builds with premium grills and stone run to $40,000 and beyond (<a href="https://lawnlove.com/blog/outdoor-kitchen-cost/">Lawn Love, 2026</a>).</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="brands">
+    <div class="wrap">
+      <p class="eyebrow">The makers</p>
+      <h2>Nine luxury outdoor brands</h2>
+      <p class="intro">The names we would trust with an estate terrace, from live-fire grills to teak. None is a partner yet; each card says where you can buy.</p>
+      <div class="brands" id="brandGrid"></div>
+    </div>
+  </section>
+
+  <section id="edit">
+    <div class="wrap">
+      <p class="eyebrow">The Edit</p>
+      <h2>Thirteen pieces we would start with</h2>
+      <p class="intro">Chosen for build quality and how they work together, not for commission. Prices change; each card says where and when we checked.</p>
+      <div class="filters" role="group" aria-label="Filter by category">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="kitchen" aria-pressed="false">Kitchens and grills</button>
+        <button type="button" data-filter="fire" aria-pressed="false">Fire and warmth</button>
+        <button type="button" data-filter="living" aria-pressed="false">Living</button>
+        <button type="button" data-filter="connected" aria-pressed="false">Connected</button>
+      </div>
+      <div id="catalog"></div>
+    </div>
+  </section>
+
+  <section id="films">
+    <div class="wrap">
+      <p class="eyebrow">Films</p>
+      <h2>Evenings on the terrace</h2>
+      <p class="intro">Short films of real evenings outside: a live-fire dinner, a long Sunday smoke, a winter terrace under the heaters.</p>
+      <div class="films" id="filmRow"></div>
+    </div>
+  </section>
+
+  <section id="connected" class="connected">
+    <div class="wrap">
+      <p class="eyebrow">Connected outdoors</p>
+      <h2>The garden that runs itself</h2>
+      <p class="intro">The newest outdoor products are controlled from your phone. They suit owners who travel, host often, or simply want the work done for them.</p>
+      <div class="pillars">
+        <div class="pillar"><h3>Cook from anywhere</h3><p>Wi-Fi pellet grills hold temperature for a 12-hour smoke and tell your phone when it is done.</p></div>
+        <div class="pillar"><h3>Heat on schedule</h3><p>Smart-Heat patio heaters warm the terrace before guests arrive and switch off on a timer.</p></div>
+        <div class="pillar"><h3>A pool that cleans itself</h3><p>Cordless robots map the pool, clean floor, walls and waterline, then park themselves.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- mf-sister-stores:start -->
+<!-- Generated by LoW90/mfo-mLintelligence scripts/sister-stores.mjs from portfolio/stores.json. Do not edit here: change the
+     registry there and regenerate. Sister stores for mfo-outdoor: mfo-sauna, mfo-golf, mfo-robotics. -->
+<!-- No sister store has a live web address yet, so shoppers see nothing here. -->
+<!-- mf-sister-stores:end -->
+
+  <section id="disclosure">
+    <div class="wrap">
+      <p class="eyebrow">How we are paid</p>
+      <h2>Affiliate disclosure</h2>
+      <p class="intro">We may earn a commission when you buy through our links, at no cost to you. Commission never decides what we recommend. Today none of these brands is a partner: links carry no tracking and we earn nothing from them yet.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>The Outdoor Estate</strong> · Powered by Many Faces Online</p>
+    <p><span class="preview-flag">Preview, not live</span> Working name. Business details, privacy policy and terms are added before launch.</p>
+  </div>
+</footer>
+
+<script>
+const CHECKED = '2 Nov 2026';
+const PRODUCTS = [
+  { id: 'k1000', cat: 'kitchen', look: 'steel', brand: 'Kalamazoo Outdoor Gourmet', name: 'K1000HT Freestanding Hybrid Fire Grill', price: 37495, blurb: 'Cooks on gas, wood or charcoal. 1,012 sq in surface, infrared rotisserie, 125,500 BTU.', where: 'kalamazoogourmet.com', url: 'https://kalamazoogourmet.com/products/K1000-Freestanding-Hybrid-Fire-Grill/', program: 'kalamazoo' },
+  { id: 'k750', cat: 'kitchen', look: 'steel', brand: 'Kalamazoo Outdoor Gourmet', name: 'K750HS Hybrid Fire Grill with Side Burner', price: 38995, blurb: 'Three cast stainless burners, infrared rotisserie and dual cooktop burners for a full kitchen in one.', where: 'kalamazoogourmet.com', url: 'https://kalamazoogourmet.com/products/k750hs-freestanding-hybrid-fire-grill-with-side-burner', program: 'kalamazoo' },
+  { id: 'hestan42', cat: 'kitchen', look: 'steel', brand: 'Hestan', name: '42-in Built-In Grill with Rotisserie, Steeletto', price: 8579, wasPrice: 9009, blurb: 'Natural gas, trellis burners and rotisserie in stainless steel.', where: 'BBQGuys', url: 'https://www.bbqguys.com/i/2957283/hestan/42-inch-stainless-steel-built-in-natural-gas-grill-with-rotisserie-gabr42-ng-ss', program: 'bbqguys' },
+  { id: 'lynx42', cat: 'kitchen', look: 'steel', brand: 'Lynx', name: 'Professional 42-in Built-In Grill with Rotisserie', price: 8499, blurb: 'Propane, three burners and rotisserie; the professional standard.', where: 'BBQGuys', url: 'https://www.bbqguys.com/lynx/42-inch-gas-bbq-grill-built-in-propane-gas-with-rotisserie-l42r-1-lp', program: 'bbqguys' },
+  { id: 'blaze44', cat: 'kitchen', look: 'steel', brand: 'Blaze', name: 'Professional LUX 44-in 4-Burner Built-In Grill', price: 4899, wasPrice: 6867.5, blurb: 'Natural gas, rotisserie included. The workhorse for a built-in island.', where: 'BBQGuys', url: 'https://www.bbqguys.com/d/17390/cooking/grills/gas/blaze', program: 'bbqguys' },
+  { id: 'blaze34', cat: 'kitchen', look: 'steel', brand: 'Blaze', name: 'Professional LUX 34-in 3-Burner Built-In Grill', price: 3999, wasPrice: 5571.5, blurb: 'Propane, rotisserie included. Fits a smaller terrace island.', where: 'BBQGuys', url: 'https://www.bbqguys.com/d/17390/cooking/grills/gas/blaze', program: 'bbqguys' },
+  { id: 'timberline', cat: 'connected', look: 'steel', brand: 'Traeger', name: 'Timberline XL Wi-Fi Pellet Grill', price: 4378.94, blurb: 'WiFIRE app control for long smokes; front shelf and cover included.', where: 'BBQGuys', url: 'https://www.bbqguys.com/i/3152262/traeger/all-new-timberline-xl-wi-fi-controlled-wood-pellet-grill-w-wifire-front-shelf-grill-cover-included', program: 'bbqguys', connected: true },
+  { id: 'bromic53', cat: 'fire', look: 'fire', brand: 'Bromic', name: 'Platinum Smart-Heat 53-in Electric Heater', price: 2681, blurb: '4,500 W infrared, 240 V. Mounts under a pergola or eave.', where: 'BBQGuys', url: 'https://www.bbqguys.com/d/20868/outdoor-living/heaters/bromic-heating/platinum', program: 'bbqguys', connected: true },
+  { id: 'bromic33', cat: 'fire', look: 'fire', brand: 'Bromic', name: 'Platinum Smart-Heat Series II 33-in Heater', price: 1610, blurb: '2,300 W, 240 V. Right-sized for a terrace or balcony.', where: 'BBQGuys', url: 'https://www.bbqguys.com/d/20868/outdoor-living/heaters/bromic-heating/platinum', program: 'bbqguys', connected: true },
+  { id: 'bromic500', cat: 'fire', look: 'fire', brand: 'Bromic', name: 'Platinum 500 Smart-Heat Propane Heater', price: 2580, blurb: '39,800 BTU propane. No electrician needed.', where: 'BBQGuys', url: 'https://www.bbqguys.com/d/20868/outdoor-living/heaters/bromic-heating/platinum', program: 'bbqguys', connected: true },
+  { id: 'breeo', cat: 'fire', look: 'fire', brand: 'Breeo', name: 'X Series 30 Smokeless Fire Pit, Stainless', price: 1599, blurb: 'Smokeless wood fire with an optional cooking surface.', where: 'The Home Depot', url: 'https://homedepot.com/p/Breeo-X-Series-30-Smokeless-Fire-Pit-in-Stainless-Steel-BR-X30S/320295896', program: 'breeo' },
+  { id: 'neighbor', cat: 'living', look: 'teak', brand: 'Neighbor', name: 'Haven Sofa with Teak Arms, Sunbrella', price: 3100, blurb: 'Modern teak and Sunbrella fabric; made to live outside.', where: 'BBQGuys', url: 'https://www.bbqguys.com/neighbor/sofa-w-teak-arms-sunbrella-leaf', program: 'bbqguys', stock: 'Sold out when checked' },
+  { id: 'beatbot', cat: 'connected', look: 'water', brand: 'Beatbot', name: 'AquaSense 2 Ultra Robotic Pool Cleaner', price: 3550, priceNote: 'list price reported by Pro Tool Reviews', blurb: 'AI camera mapping; cleans floor, walls, waterline and surface, then parks itself.', where: 'beatbot.com', url: 'https://www.beatbot.com/', program: 'beatbot', connected: true }
+];
+const PROGRAMS = {
+  kalamazoo: 'Program found: 10%, 90-day cookie (Awin). Not applied yet.',
+  bbqguys: 'Program found: about 4% (Impact). Not applied yet.',
+  breeo: 'Breeo runs a 4% program; this link goes to the store where we checked the price.',
+  beatbot: 'Program found: 10%, 30-day cookie. Not applied yet.'
+};
+const BUILD = {
+  compact: { label: 'Terrace, up to 100 sq ft', cost: [3300, 13000] },
+  medium: { label: 'Patio, 100 to 200 sq ft', cost: [6600, 26000] },
+  large: { label: 'Entertaining, 200 to 400 sq ft', cost: [9900, 39000] },
+  estate: { label: 'Estate, about 400 sq ft', cost: [13200, 52000] }
+};
+// Media slots: set src to a file in assets/ once licensed photos or approved films exist. Empty slots show a designed placeholder.
+const HERO_FILM = { src: null, poster: null, aiGenerated: true };
+const FILMS = [
+  { id: 'live-fire', title: 'Live-fire dinner', line: 'Kalamazoo hybrid grill, six guests', src: null, aiGenerated: true },
+  { id: 'sunday-smoke', title: 'The Sunday smoke', line: 'Twelve hours, watched from a phone', src: null, aiGenerated: true },
+  { id: 'winter-terrace', title: 'Winter terrace', line: 'Bromic heat and a Breeo fire', src: null, aiGenerated: true }
+];
+/* Most luxurious first; every maker here has a product with a checked price in PRODUCTS (sister-store format, 2026-11-03). */
+const BRANDS = [
+  { name: 'Kalamazoo Outdoor Gourmet', what: 'Hybrid live-fire grills and outdoor kitchen cabinetry, made in Michigan.', from: 37495, buy: 'kalamazoogourmet.com', url: 'https://kalamazoogourmet.com/', program: 'Program found: 10%, 90 days (Awin)', photo: null },
+  { name: 'Hestan', what: 'Chef-grade grills with colour-finished steel.', from: 8579, buy: 'BBQGuys', url: 'https://www.bbqguys.com/i/2957283/hestan/42-inch-stainless-steel-built-in-natural-gas-grill-with-rotisserie-gabr42-ng-ss', program: 'Through BBQGuys (about 4%)', photo: null },
+  { name: 'Lynx', what: 'Professional built-in grills and outdoor kitchen equipment.', from: 8499, buy: 'BBQGuys', url: 'https://www.bbqguys.com/lynx/42-inch-gas-bbq-grill-built-in-propane-gas-with-rotisserie-l42r-1-lp', program: 'Through BBQGuys (about 4%)', photo: null },
+  { name: 'Neighbor', what: 'Modern teak and Sunbrella outdoor furniture.', from: 3100, buy: 'BBQGuys', url: 'https://www.bbqguys.com/neighbor/sofa-w-teak-arms-sunbrella-leaf', program: 'Program found: 6% (Impact)', photo: null },
+  { name: 'Bromic', what: 'Infrared patio heaters with Smart-Heat control.', from: 1610, buy: 'BBQGuys', url: 'https://www.bbqguys.com/d/20868/outdoor-living/heaters/bromic-heating/platinum', program: 'Through BBQGuys (about 4%)', photo: null },
+  { name: 'Traeger', what: 'Wi-Fi wood pellet grills.', from: 4378.94, buy: 'BBQGuys', url: 'https://www.bbqguys.com/i/3152262/traeger/all-new-timberline-xl-wi-fi-controlled-wood-pellet-grill-w-wifire-front-shelf-grill-cover-included', program: 'Through BBQGuys (about 4%)', photo: null },
+  { name: 'Blaze', what: 'Built-in grills for outdoor kitchen islands.', from: 3999, buy: 'BBQGuys', url: 'https://www.bbqguys.com/d/17390/cooking/grills/gas/blaze', program: 'Through BBQGuys (about 4%)', photo: null },
+  { name: 'Beatbot', what: 'AI-mapping robotic pool cleaners.', from: 3550, buy: 'beatbot.com', url: 'https://www.beatbot.com/', program: 'Program found: 10%, 30 days', photo: null },
+  { name: 'Breeo', what: 'Smokeless wood fire pits in steel.', from: 1599, buy: 'The Home Depot', url: 'https://homedepot.com/p/Breeo-X-Series-30-Smokeless-Fire-Pit-in-Stainless-Steel-BR-X30S/320295896', program: 'Breeo program found: 4%', photo: null }
+];
+const byId = id => PRODUCTS.find(p => p.id === id);
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function money(n) {
+  return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+}
+function goLink(p) {
+  const u = new URL(p.url);
+  u.searchParams.set('utm_source', 'theoutdoorestate');
+  u.searchParams.set('utm_medium', 'referral');
+  u.searchParams.set('utm_campaign', p.id);
+  return u.toString();
+}
+
+function readPlan() {
+  const extras = [...document.querySelectorAll('input[name="extra"]:checked')].map(i => i.value);
+  return {
+    size: document.getElementById('size').value,
+    style: document.getElementById('style').value,
+    climate: document.getElementById('climate').value,
+    seating: extras.includes('seating'),
+    pool: extras.includes('pool')
+  };
+}
+
+function recommend(plan) {
+  const build = BUILD[plan.size];
+  if (!build) throw new Error('unknown size ' + plan.size);
+  const big = plan.size === 'large' || plan.size === 'estate';
+  const picks = [];
+  if (plan.style === 'fire') picks.push({ id: plan.size === 'estate' ? 'k750' : 'k1000', why: plan.size === 'estate' ? 'live fire plus cooktop burners for a large party' : 'cooks on gas, wood or charcoal' });
+  else if (plan.style === 'smoke') picks.push({ id: 'timberline', why: 'long smokes you can watch from your phone' });
+  else if (plan.size === 'estate') picks.push({ id: 'hestan42', why: 'chef-grade 42-inch grill for a large kitchen' });
+  else picks.push({ id: big ? 'blaze44' : 'blaze34', why: big ? 'four burners for a bigger crowd' : 'three burners sized for a terrace' });
+  if (plan.climate === 'cool') {
+    picks.push({ id: plan.size === 'compact' ? 'bromic33' : 'bromic53', why: 'keeps evenings comfortable on a timer' });
+    picks.push({ id: 'breeo', why: 'a smokeless fire to gather around' });
+  }
+  if (plan.seating) picks.push({ id: 'neighbor', why: 'teak and Sunbrella that can stay outside' });
+  if (plan.pool) picks.push({ id: 'beatbot', why: 'cleans the pool and parks itself' });
+  return { build: build.cost, label: build.label, items: picks.map(p => ({ ...byId(p.id), why: p.why })) };
+}
+
+function renderPlan() {
+  const r = recommend(readPlan());
+  const rows = r.items.map(p => `<li><span>${esc(p.brand)} ${esc(p.name)}<span class="why">${esc(p.why)}</span></span><span>${money(p.price)}</span></li>`).join('');
+  document.getElementById('planResult').innerHTML =
+    `<p class="eyebrow">Typical build cost</p><p class="range">${money(r.build[0])} to ${money(r.build[1])}</p>` +
+    `<p class="note">For a ${esc(r.label.toLowerCase())} kitchen, before the products below. Source: HomeAdvisor.</p>` +
+    `<h3 style="margin-top:22px">Where we would start</h3><ul>${rows}</ul>`;
+  return r;
+}
+
+function card(p) {
+  const was = p.wasPrice ? ` <span style="font-size:15px;color:var(--ink-soft);text-decoration:line-through">${money(p.wasPrice)}</span>` : '';
+  const tag = p.connected ? '<span class="tag">Connected</span>' : '';
+  const stock = p.stock ? ` · ${esc(p.stock)}` : '';
+  return `<article class="card" id="${p.id}" data-cat="${p.cat}${p.connected ? ' connected' : ''}">` +
+    `<div class="swatch ${p.look}">${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy">` : ''}${tag}</div><div class="body">` +
+    `<span class="brandline">${esc(p.brand)}</span><h3>${esc(p.name)}</h3>` +
+    `<div class="price">${money(p.price)}${was}</div><p>${esc(p.blurb)}</p>` +
+    `<div class="meta">Price ${esc(p.priceNote || 'checked at ' + p.where)}, ${CHECKED}${stock}.<br>${esc(PROGRAMS[p.program])}</div>` +
+    `<a class="btn" rel="sponsored noopener" target="_blank" href="${esc(goLink(p))}">View at ${esc(p.where)}</a></div></article>`;
+}
+
+function renderCatalog(filter) {
+  const list = PRODUCTS.filter(p => filter === 'all' || p.cat === filter || (filter === 'connected' && p.connected));
+  document.getElementById('catalog').innerHTML = list.map(card).join('');
+  document.querySelectorAll('.filters button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+  return list;
+}
+
+function renderBrands() {
+  document.getElementById('brandGrid').innerHTML = BRANDS.map(b =>
+    `<article class="brand-card"><div class="media">${b.photo ? `<img src="${esc(b.photo)}" alt="${esc(b.name)} outdoor setting" loading="lazy">` : `<span class="mark">${esc(b.name)}</span>`}</div>` +
+    `<div class="body"><h3>${esc(b.name)}</h3><p>${esc(b.what)}</p>` +
+    `<p>${b.from ? 'From ' + money(b.from) : 'Price on request'} · <a rel="sponsored noopener" target="_blank" href="${esc(goLink({ url: b.url, id: 'brand-' + b.name.toLowerCase().replace(/[^a-z]+/g, '-') }))}">${esc(b.buy)}</a></p>` +
+    `<div class="status">${esc(b.program)}</div></div></article>`).join('');
+}
+
+function renderFilms() {
+  document.getElementById('filmRow').innerHTML = FILMS.map(f =>
+    `<figure class="film" style="margin:0">${f.src ? `<video src="${esc(f.src)}" muted loop playsinline preload="metadata" aria-label="${esc(f.title)}"></video>${f.aiGenerated ? '<span class="ai-label">AI film</span>' : ''}` : '<span class="soon">Film coming</span>'}` +
+    `<figcaption class="caption"><strong>${esc(f.title)}</strong><span>${esc(f.line)}</span></figcaption></figure>`).join('');
+  document.querySelectorAll('.film video').forEach(v => v.addEventListener('click', () => (v.paused ? v.play() : v.pause())));
+}
+
+function renderHeroFilm() {
+  if (!HERO_FILM.src) return false;
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('heroScene').innerHTML = `<video src="${esc(HERO_FILM.src)}"${HERO_FILM.poster ? ` poster="${esc(HERO_FILM.poster)}"` : ''} muted loop playsinline ${reduce ? '' : 'autoplay'}></video>`;
+  return true;
+}
+
+function renderCosts() {
+  document.getElementById('costRows').innerHTML = Object.values(BUILD).map(b => `<tr><td>${esc(b.label)}</td><td>${money(b.cost[0])} to ${money(b.cost[1])}</td></tr>`).join('');
+}
+
+function init() {
+  renderPlan(); renderCatalog('all'); renderCosts(); renderBrands(); renderFilms(); renderHeroFilm();
+  document.getElementById('planForm').addEventListener('change', renderPlan);
+  document.querySelectorAll('.filters button').forEach(b => b.addEventListener('click', () => renderCatalog(b.dataset.filter)));
+  const menu = document.getElementById('menuBtn'), links = document.getElementById('navLinks');
+  menu.addEventListener('click', () => { const open = links.classList.toggle('open'); menu.setAttribute('aria-expanded', String(open)); });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { links.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); }));
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+</script>
+</body>
+</html>
