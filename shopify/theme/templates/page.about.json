@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "main": {
+      "type": "mfe-page",
+      "settings": {}
+    },
+    "business": {
+      "type": "mf-business",
+      "settings": {
+        "heading": "Business details",
+        "show_details": true,
+        "show_form": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "business"
+  ]
+}

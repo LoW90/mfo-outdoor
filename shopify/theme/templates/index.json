@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "mfe-home",
+      "settings": {}
+    },
+    "sisters": {
+      "type": "mf-sister-stores",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "sisters"
+  ]
+}

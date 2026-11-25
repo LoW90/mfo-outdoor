@@ -1,0 +1,38 @@
+{%- comment -%}
+  Store information strip, under the footer on every page: About, Contact, the store policies set in
+  Shopify admin (Settings > Policies) and the business details from Theme settings > Business details.
+  Nothing renders until at least one of those exists, so an unfinished store shows no empty links.
+{%- endcomment -%}
+{%- liquid
+  assign s = settings
+  assign show = false
+  if pages.about.url != blank or pages.contact.url != blank or shop.policies.size > 0 or s.business_name != blank or s.business_email != blank
+    assign show = true
+  endif
+-%}
+{%- if show -%}
+<style>
+  .mf-trust{max-width:1180px;margin:0 auto;padding:16px 20px 28px;font-size:14px;line-height:1.6;text-align:center}
+  .mf-trust__links{display:flex;flex-wrap:wrap;justify-content:center;gap:0 22px}
+  .mf-trust a{display:inline-flex;align-items:center;min-height:44px;color:inherit;text-decoration:underline;text-underline-offset:3px}
+  .mf-trust__business{margin:4px 0 0}
+  .mf-trust__business a{min-height:0}
+</style>
+<div class="mf-trust">
+  <nav class="mf-trust__links" aria-label="Store information">
+    {%- if pages.about.url != blank -%}<a href="{{ pages.about.url }}">{{ pages.about.title | escape }}</a>{%- endif -%}
+    {%- if pages.contact.url != blank -%}<a href="{{ pages.contact.url }}">{{ pages.contact.title | escape }}</a>{%- endif -%}
+    {%- for policy in shop.policies -%}<a href="{{ policy.url }}">{{ policy.title | escape }}</a>{%- endfor -%}
+  </nav>
+  {%- if s.business_name != blank or s.business_email != blank -%}
+    <p class="mf-trust__business">
+      {%- if s.business_name != blank -%}Operated by {{ s.business_name | escape }}{%- endif -%}
+      {%- if s.business_address != blank %} &middot; {{ s.business_address | strip | escape | newline_to_br | strip_newlines | replace: '<br />', ', ' }}{%- endif -%}
+      {%- if s.business_email != blank %} &middot; <a href="mailto:{{ s.business_email | strip | escape }}">{{ s.business_email | strip | escape }}</a>{%- endif -%}
+    </p>
+  {%- endif -%}
+</div>
+{%- endif -%}
+{% schema %}
+{ "name": "Store information", "settings": [] }
+{% endschema %}

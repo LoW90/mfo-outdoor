@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "mfe-connected",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,6 @@
+{%- comment -%} Required by Shopify. This store sells no gift cards. {%- endcomment -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{{ shop.name }}</title>{{ 'outdoor-estate.css' | asset_url | stylesheet_tag }}</head>
+<body><main class="mf-room mf-site__page"><section class="mf-room__band"><div class="mf-room__shell"><h1>{{ shop.name }}</h1><p>Gift card balance: {{ gift_card.balance | money }}</p><p>Code: {{ gift_card.code | format_code }}</p></div></section></main></body>
+</html>

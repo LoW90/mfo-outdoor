@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "mfe-cart",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

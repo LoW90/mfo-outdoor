@@ -1,0 +1,78 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "The Outdoor Estate",
+    "theme_version": "1.0.0",
+    "theme_author": "Many Faces Online",
+    "theme_documentation_url": "https://github.com/LoW90/mfo-outdoor",
+    "theme_support_url": "https://github.com/LoW90/mfo-outdoor/issues"
+  },
+  {
+    "name": "Store links",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The Outdoor Estate grew out of the outdoor estate section of Many Faces Online. Set the parent store's web address to link back to it from the footer."
+      },
+      {
+        "type": "url",
+        "id": "parent_url",
+        "label": "Many Faces Online web address"
+      }
+    ]
+  },
+  {
+    "name": "Search engines",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "preview_noindex",
+        "label": "Hide from search engines (preview)",
+        "info": "Keep on until the owner approves a public launch.",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "default_description",
+        "label": "Default description",
+        "default": "Plan a luxury outdoor kitchen and living space: live-fire grills, heat, fire and connected outdoor products, with real prices and honest picks."
+      }
+    ]
+  },
+  {
+    "name": "Business details",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shown in the store information strip under the footer and on pages that use the About or Contact template. Empty fields are hidden."
+      },
+      {
+        "type": "text",
+        "id": "business_name",
+        "label": "Legal business name"
+      },
+      {
+        "type": "textarea",
+        "id": "business_address",
+        "label": "Business address",
+        "info": "One line per address line."
+      },
+      {
+        "type": "text",
+        "id": "business_email",
+        "label": "Customer email"
+      },
+      {
+        "type": "text",
+        "id": "business_phone",
+        "label": "Phone (optional)"
+      },
+      {
+        "type": "text",
+        "id": "business_hours",
+        "label": "Reply time (optional)",
+        "info": "For example: We reply within one business day."
+      }
+    ]
+  }
+]
