@@ -1,0 +1,71 @@
+{%- comment -%}
+  Business details and an optional Shopify contact form, for pages using the About or Contact template.
+  Details come from Theme settings > Business details; empty fields are left out.
+{%- endcomment -%}
+{%- liquid
+  assign s = settings
+  assign has_details = false
+  if section.settings.show_details
+    if s.business_name != blank or s.business_address != blank or s.business_email != blank or s.business_phone != blank
+      assign has_details = true
+    endif
+  endif
+-%}
+{%- if has_details or section.settings.show_form -%}
+<style>
+  .mf-business{max-width:720px;margin:0 auto;padding:8px 20px 72px;font-size:16px;line-height:1.6}
+  .mf-business h2{font-size:clamp(24px,4vw,32px);line-height:1.2;margin:0 0 20px}
+  .mf-business__details{display:grid;gap:16px;margin:0 0 36px}
+  .mf-business__details dt{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+  .mf-business__details dd{margin:2px 0 0}
+  .mf-business a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+  .mf-business form{display:grid;gap:6px}
+  .mf-business label{font-weight:600;margin-top:12px}
+  .mf-business input,.mf-business textarea{box-sizing:border-box;width:100%;min-height:48px;padding:12px 14px;font:inherit;font-size:16px;color:inherit;background:transparent;border:1px solid currentColor;border-radius:8px}
+  .mf-business button{justify-self:start;margin-top:20px;min-height:52px;padding:0 32px;font:inherit;font-weight:600;color:inherit;background:transparent;border:1px solid currentColor;border-radius:999px;cursor:pointer}
+  .mf-business__status{padding:14px 16px;border:1px solid currentColor;border-radius:8px}
+  .mf-business__note{font-size:14px;opacity:.8;margin:12px 0 0}
+</style>
+<section class="mf-business">
+  {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading | escape }}</h2>{%- endif -%}
+  {%- if has_details -%}
+    <dl class="mf-business__details">
+      {%- if s.business_name != blank -%}<div><dt>Business</dt><dd>{{ s.business_name | escape }}</dd></div>{%- endif -%}
+      {%- if s.business_address != blank -%}<div><dt>Address</dt><dd>{{ s.business_address | strip | escape | newline_to_br }}</dd></div>{%- endif -%}
+      {%- if s.business_email != blank -%}<div><dt>Email</dt><dd><a href="mailto:{{ s.business_email | strip | escape }}">{{ s.business_email | strip | escape }}</a></dd></div>{%- endif -%}
+      {%- if s.business_phone != blank -%}<div><dt>Phone</dt><dd><a href="tel:{{ s.business_phone | remove: ' ' | remove: '-' | remove: '(' | remove: ')' | remove: '.' | escape }}">{{ s.business_phone | escape }}</a></dd></div>{%- endif -%}
+      {%- if s.business_hours != blank -%}<div><dt>Replies</dt><dd>{{ s.business_hours | escape }}</dd></div>{%- endif -%}
+    </dl>
+  {%- endif -%}
+  {%- if section.settings.show_form -%}
+    {%- form 'contact', id: 'mf-contact-form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="mf-business__status" role="status">Thank you. Your message has been sent.{% if s.business_hours != blank %} {{ s.business_hours | escape }}{% endif %}</p>
+      {%- elsif form.errors -%}
+        <div class="mf-business__status" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+      <label for="mf-contact-name">Name</label>
+      <input id="mf-contact-name" type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}">
+      <label for="mf-contact-email">Email (required)</label>
+      <input id="mf-contact-email" type="email" name="contact[email]" autocomplete="email" required value="{{ form.email }}">
+      <label for="mf-contact-phone">Phone (optional)</label>
+      <input id="mf-contact-phone" type="tel" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}">
+      <label for="mf-contact-body">How can we help? (required)</label>
+      <textarea id="mf-contact-body" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+      <button type="submit">Send message</button>
+      <p class="mf-business__note">We use your details only to reply to you.</p>
+    {%- endform -%}
+  {%- endif -%}
+</section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Business details",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Business details" },
+    { "type": "checkbox", "id": "show_details", "label": "Show business details from Theme settings", "default": true },
+    { "type": "checkbox", "id": "show_form", "label": "Show contact form", "default": false }
+  ],
+  "presets": [{ "name": "Business details" }]
+}
+{% endschema %}

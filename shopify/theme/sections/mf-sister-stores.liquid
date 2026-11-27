@@ -1,0 +1,64 @@
+{%- comment -%}
+  Hand-owned placeholder (shopify/planner/build.mjs) until LoW90/mfo-mLintelligence scripts/sister-stores.mjs has this store.
+  Sister stores for mfo-outdoor: mfo-sauna, mfo-golf, mfo-robotics. A card shows only once that store's https web address is set below;
+  links go to the sister store and name this store in their UTM tags. No films or photos from other stores.
+{%- endcomment -%}
+{%- liquid
+  assign live = 0
+  assign mfo_sauna_url = section.settings.mfo_sauna_url | default: '' | strip
+  assign scheme = mfo_sauna_url | slice: 0, 8 | downcase
+  if scheme != 'https://'
+    assign mfo_sauna_url = ''
+  endif
+  if mfo_sauna_url != blank
+    assign live = live | plus: 1
+  endif
+  assign mfo_golf_url = section.settings.mfo_golf_url | default: '' | strip
+  assign scheme = mfo_golf_url | slice: 0, 8 | downcase
+  if scheme != 'https://'
+    assign mfo_golf_url = ''
+  endif
+  if mfo_golf_url != blank
+    assign live = live | plus: 1
+  endif
+  assign mfo_robotics_url = section.settings.mfo_robotics_url | default: '' | strip
+  assign scheme = mfo_robotics_url | slice: 0, 8 | downcase
+  if scheme != 'https://'
+    assign mfo_robotics_url = ''
+  endif
+  if mfo_robotics_url != blank
+    assign live = live | plus: 1
+  endif
+-%}
+{%- if live > 0 -%}
+<section class="mf-sisters mf-room__band" data-mf-sisters aria-labelledby="mf-sisters-title"><div class="mf-room__shell">
+  <p class="mf-room__eyebrow mf-room__eyebrow--gold">From Many Faces Online</p><h2 id="mf-sisters-title">Sister stores</h2>
+  <ul class="mfe-sisters">
+  {%- if mfo_sauna_url != blank -%}<li><a href="{{ mfo_sauna_url }}/?utm_source=mfo-outdoor&amp;utm_medium=sister-store">The Sauna Edit</a></li>{%- endif -%}
+  {%- if mfo_golf_url != blank -%}<li><a href="{{ mfo_golf_url }}/?utm_source=mfo-outdoor&amp;utm_medium=sister-store">The Golf Atelier</a></li>{%- endif -%}
+  {%- if mfo_robotics_url != blank -%}<li><a href="{{ mfo_robotics_url }}/?utm_source=mfo-outdoor&amp;utm_medium=sister-store">Many Faces Robotics</a></li>{%- endif -%}
+  </ul>
+</div></section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Sister stores",
+  "settings": [
+    {
+      "type": "url",
+      "id": "mfo_sauna_url",
+      "label": "The Sauna Edit web address"
+    },
+    {
+      "type": "url",
+      "id": "mfo_golf_url",
+      "label": "The Golf Atelier web address"
+    },
+    {
+      "type": "url",
+      "id": "mfo_robotics_url",
+      "label": "Many Faces Robotics web address"
+    }
+  ]
+}
+{% endschema %}

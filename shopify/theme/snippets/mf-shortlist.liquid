@@ -1,0 +1,15 @@
+{%- comment -%} Hand-owned copy (shopify/planner/build.mjs) until LoW90/mfo-mLintelligence scripts/shortlist.mjs has this store. The shortlist stays in the browser; there is no email sign-up here (mounts is empty). CTA use is counted only with analytics consent. {%- endcomment -%}
+{%- liquid
+  assign mfk_home = routes.root_url
+  assign mfk_contact = routes.root_url | append: 'contact' | replace: '//', '/'
+  assign mfk_ask = routes.root_url | append: 'pages/contact?topic=specialist' | replace: '//', '/'
+  if shop.privacy_policy
+    assign mfk_privacy = shop.privacy_policy.url
+  else
+    assign mfk_privacy = '/policies/privacy-policy'
+  endif
+-%}
+<style>:root{--mfk-ink:var(--ink);--mfk-muted:var(--sub);--mfk-line:var(--line);--mfk-surface:var(--ivory);--mfk-accent:var(--gold)}</style>
+{{ 'mf-shortlist.css' | asset_url | stylesheet_tag }}
+<script type="application/json" id="mf-shortlist-config">{"store":"mfo-outdoor","labels":{"find":"Plan your outdoor kitchen","keep":"Keep my terrace shortlist","keepTitle":"Keep your shortlist","keepNote":"Your shortlist stays in this browser.","compare":"Compare my options","ask":"Ask an outdoor specialist","buy":"View at [Merchant] ↗","closing":"Evenings worth staying out for.","restorePrompt":"Your saved terrace shortlist is ready to open on this device.","restore":"Open my shortlist"},"classes":{"primary":"btn"},"mounts":[],"outbound":".mf-buy","restoreTarget":"main","consent":"","thanks":"","buyNote":"Opens the merchant's site. We may earn a commission if you buy; the merchant sets the price.","quote":false,"variants":{},"home":{{ mfk_home | json }},"contactUrl":{{ mfk_contact | json }},"askUrl":{{ mfk_ask | json }},"privacyUrl":{{ mfk_privacy | json }}}</script>
+<script src="{{ 'mf-shortlist.js' | asset_url }}" defer></script>

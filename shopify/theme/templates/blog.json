@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "mfe-blog",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

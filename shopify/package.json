@@ -1,0 +1,22 @@
+{
+  "name": "many-faces-outdoor-shopify-theme",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shopify Online Store 2.0 theme for The Outdoor Estate, built from catalog.json and the planner layer",
+  "scripts": {
+    "data": "node ../tools/shopify-catalog.mjs",
+    "build": "node ../tools/shopify-catalog.mjs && node build.mjs && node planner/build.mjs && node planner/docs.mjs",
+    "check": "node tests/theme-check.mjs",
+    "preview": "npm run build && node planner/preview.mjs",
+    "launch-check": "node launch-check.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs planner/tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@shopify/theme-check-node": "3.30.1",
+    "liquidjs": "10.30.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
