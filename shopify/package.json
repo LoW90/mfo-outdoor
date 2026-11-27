@@ -6,7 +6,7 @@
   "description": "Shopify Online Store 2.0 theme for The Outdoor Estate, built from catalog.json and the planner layer",
   "scripts": {
     "data": "node ../tools/shopify-catalog.mjs",
-    "build": "node posters.mjs && node ../tools/shopify-catalog.mjs && node build.mjs && node planner/build.mjs && node planner/docs.mjs",
+    "build": "node posters.mjs && node ../tools/shopify-catalog.mjs && node build.mjs && node planner/build.mjs && node planner/docs.mjs && node films.mjs",
     "check": "node tests/theme-check.mjs",
     "preview": "npm run build && node planner/preview.mjs",
     "launch-check": "node launch-check.mjs",
