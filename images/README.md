@@ -1,5 +1,7 @@
 # The Outdoor Estate: photographs and films
 
+**Films need only the .mp4.** `npm run build` makes each film's .webp cover still from its first second when that file is missing (and `hero.webp` from `hero-film.mp4`), using ffmpeg if it is installed. A .webm copy is optional.
+
 Original photorealistic media only: never drawings or SVG stand-ins, and no films borrowed from another Many Faces store.
 Drop files here with exactly these names, then run `npm run build` in `shopify/`. Every slot is optional; an empty slot
 shows nothing (a dark band, a monogram or a toned frame) until its file arrives. The briefs, sizes and status are in `docs/MEDIA_SLOTS.md`.
