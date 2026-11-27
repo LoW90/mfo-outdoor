@@ -1,3 +1,4 @@
+import {withFilms, isFilmsLayout} from '../films.mjs';
 /** Standalone room store tests (D-038), copied from LoW90/mfo-mLintelligence portfolio/standalone/tests. One change for
  *  The Outdoor Estate: they run on the finished theme, so the files planner/build.mjs patches are compared after that
  *  patch (marked "Outdoor Estate").
@@ -26,7 +27,7 @@ test('Shopify Theme Check reports no errors', async () => {
 });
 
 test('theme and CSV are current with catalog.json', () => {
-  for (const f of files(c)) { const name = f.path.replace(/^theme\//, ''); /* Outdoor Estate: patched files */ assert.equal(fs.readFileSync(path.join(root, f.path), 'utf8'), PATCHED.includes(name) ? patch(name, f.text) : f.text, f.path + ' is out of date; run npm run build'); }
+  for (const f of files(c)) { const name = f.path.replace(/^theme\//, ''); /* Outdoor Estate: patched files */ assert.equal(fs.readFileSync(path.join(root, f.path), 'utf8'), (w => isFilmsLayout(f.path) ? withFilms(w) : w)(PATCHED.includes(name) ? patch(name, f.text) : f.text), f.path + ' is out of date; run npm run build'); }
 });
 
 test('product CSV: every researched piece, none can be bought here', () => {

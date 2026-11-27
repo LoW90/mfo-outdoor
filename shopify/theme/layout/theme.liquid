@@ -29,5 +29,7 @@
   <script>window.MF_SITE = {root: {{ routes.root_url | json }}, store: "mfo-outdoor", code: "odest", buy: "View at [Merchant] ↗"};</script>
   <script src="{{ 'outdoor-estate.js' | asset_url }}" defer></script>
   {% render 'mf-shortlist' %}
+{{ 'mf-films.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'mf-films.js' | asset_url }}" defer></script>
 </body>
 </html>
